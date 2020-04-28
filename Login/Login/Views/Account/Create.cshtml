@@ -1,0 +1,73 @@
+﻿@model Login.Data.SystemUser
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>SystemUser</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SystemUserName" class="control-label"></label>
+                <input asp-for="SystemUserName" class="form-control" />
+                <span asp-validation-for="SystemUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserLastName" class="control-label"></label>
+                <input asp-for="SystemUserLastName" class="form-control" />
+                <span asp-validation-for="SystemUserLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserCity" class="control-label"></label>
+                <input asp-for="SystemUserCity" class="form-control" />
+                <span asp-validation-for="SystemUserCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserDni" class="control-label"></label>
+                <input asp-for="SystemUserDni" class="form-control" />
+                <span asp-validation-for="SystemUserDni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserEmail" class="control-label"></label>
+                <input asp-for="SystemUserEmail" class="form-control" />
+                <span asp-validation-for="SystemUserEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserPhone" class="control-label"></label>
+                <input asp-for="SystemUserPhone" class="form-control" />
+                <span asp-validation-for="SystemUserPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserInstitution" class="control-label"></label>
+                <input asp-for="SystemUserInstitution" class="form-control" />
+                <span asp-validation-for="SystemUserInstitution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserImage" class="control-label"></label>
+                <input asp-for="SystemUserImage" class="form-control" />
+                <span asp-validation-for="SystemUserImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SystemUserPassword" class="control-label"></label>
+                <input asp-for="SystemUserPassword" class="form-control" />
+                <span asp-validation-for="SystemUserPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
