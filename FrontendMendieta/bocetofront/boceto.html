@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Actividades</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+    </head>
+    <body>
+        <form class="text-center border border-light p-5">
+            <div id="contenedor" class="form-group">
+                <h2>Registrar Actividades</h2>
+                <!-- Section to set the title of the activity -->
+                <div id="conteinertitle">
+                    <h3>Titulo de la Actividad</h3>
+                    <input type="text" class="form-control" id="title" placeholder="Título de la actividad">
+                </div>
+                <!--Section to set the dificulty of the activity-->
+                    <h3>Nivel de Dificultad</h3>
+                <div id="conteinerage" class="radio">                    
+                    <label>
+                        <input type="radio" name="radio" value="low" checked>
+                        0-5
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" value="medium">
+                        6-10
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" value="high">
+                        11-15
+                    </label>
+                    <label>
+                        <input type="radio" name="radio" value="upper">
+                        16-20
+                    </label>
+                </div>
+                <!--Section to set the area where the activity belongs-->
+                <div id="conteinerarea">
+                    <h3>Área de la actividad</h3>
+                    <select class="form-control form-control-lg">
+                        <option>Area 1</option>
+                        <option>Area 2</option>
+                    </select>
+                </div>
+                <!--Section to define the naps-->
+                <div id="conteinernaps" maxlenght="150">
+                    <h3>Tips</h3>
+                    <input type="text" class="form-control" id="naps" placeholder="Ingrese los tips de trabajo">
+                </div>
+                <!--Section to define the duration of the activity-->
+                <div id="conteinertime">
+                    <h3>Duración de la Actividad</h3>
+                    <input type="textarea" class="form-control" id="time" placeholder="Ingrese la duración de la actividad en minutos">
+                </div>
+                <!--Section to set a short description of the activity-->
+                <div id="conteinerresume">
+                    <h3>Resumen de la actividad</h3>
+                    <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="5" cols="40"></textarea>
+                </div>
+                <div id="conteinerdescription">
+                <!--Section to set a long description of the activity-->
+                    <h3>Descripción</h3>
+                    <textarea class="form-control" id="description " placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="10" cols="40"></textarea>
+                </div>
+                <!--Section to add aditionals files-->
+                <div id="conteinerfiles">
+                    <h3>Archivos Adjuntos</h3>
+                    <input type="file">
+                </div>
+                <!--Button created to send the information of the form-->
+                <div id="conteinerbutton">
+                        <button type="submit" class="btn btn-info btn-block">ENVIAR</button>
+                </div>
+            </div>
+            
+        </form> 
+    </body>
+</html>

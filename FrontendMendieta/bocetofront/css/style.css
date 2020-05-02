@@ -1,0 +1,38 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+@font-face{
+    font-family: monserrat;
+    src: url(fonts/Montserrat-SemiBold.ttf);
+}
+body{
+    margin-left: 100px;
+    width: 500px;
+    font-family: monserrat;
+    color: black;
+}
+label{
+    font-size: 25px;
+}
+button{
+    margin-top: 10px;
+}
+h3{
+    background-color:lightgray;
+    border-bottom-style: dotted;
+}
+h2{
+    text-align: center;
+}
+#contenedor{
+    border-radius: 10px;
+    background-color: slategray;
+    padding: 20px;
+}
+.form-control{
+    border-radius: 20px;
+}
+#conteinerbutton{
+    font-family: monserrat;
+}

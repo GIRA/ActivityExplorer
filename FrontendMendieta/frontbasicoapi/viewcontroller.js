@@ -8,18 +8,43 @@ function ComponentInitialization(){
     let BtnMod= document.getElementById("BtnMod");    
     let BtnDelete= document.getElementById("BtnDelete");
     let actions=requestHandler();
+    let tabla= document.getElementById("table");
     let exampleActivity={"Id":"6","Area":"Educación","Titulo":"Insertar robots","Descripcion":"Inserción de la robótica en el Aula","Duracion":"60 hrs"};
-
 
     BtnGet.addEventListener("click",function()
     {
         let result=actions.getActivities();
         result.then(function(res){
-        console.log(res);
-        //here will be the function that will make the HTML document
-        
+            console.log(res);
         })
+        /*res.map((arg)=>{
+                     
+        });*/
+        
     });
+    function CreateRow(){
+        var row= document.createElement("TR");
+
+        var cell= document.createElement("TD");
+
+        cell.appendChild(document.createTextNode(arg.Id));
+        cell.appendChild(document.createTextNode(arg.Author));
+        cell.appendChild(document.createTextNode(arg.Area));
+        cell.appendChild(document.createTextNode(arg.Title));
+        cell.appendChild(document.createTextNode(arg.Institution));
+        cell.appendChild(document.createTextNode(arg.AgeMin));
+        cell.appendChild(document.createTextNode(arg.AgeMax));
+        cell.appendChild(document.createTextNode(arg.ShortDescp));       
+        cell.appendChild(document.createTextNode(arg.Description));
+        cell.appendChild(document.createTextNode(arg.PublishingDate));
+        cell.appendChild(document)
+        cell.appendChild(document.createTextNode(arg.Duration));
+        cell.appendChild(document.createTextNode(arg.Files));
+        
+        row.appendChild(cell);
+        tabla.appendChild(row);
+        document.body.insertAdjacentElement('beforeend', tabla);
+    }
 
     BtnGetId.addEventListener("click",function()
     {        
@@ -62,7 +87,8 @@ function ComponentInitialization(){
         console.log(res);
         //here will be the function that will make the HTML document
         })
-    });
-
+    });   
 }
+
+
 //{"Id": "1", "Area": "artevisual", "Titulo": "Insertar robots", "Descripcion": "Inserción de la robótica en el Aula", "Duracion": "50 hrs"} para testear las consultas
