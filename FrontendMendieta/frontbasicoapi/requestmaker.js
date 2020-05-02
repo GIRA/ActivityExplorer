@@ -13,6 +13,7 @@ function requestHandler(){
                     if(res.ok){
                         console.log(res);
                         //console.log(res.body);
+                        
                         return res.json();
                     }else{
                         throw 'Nose se pudo hacer la peticion';
