@@ -2,77 +2,75 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Actividades</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+        <title>Registrar actividad</title>
+        <link rel="stylesheet" href="dist/css/bootstrap.css">
+        <link rel="stylesheet" href="dist/css/style.css">
+        <script type="text/javascript" src="dist/js/jquery-3.5.0.min.js"></script>
+        <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
+        <script>
+            function thisFileUpload() {
+                document.getElementById("file").click();
+            };
+    </script>
     </head>
     <body>
-        <form class="text-center border border-light p-5">
-            <div id="contenedor" class="form-group">
-                <h2>Registrar Actividades</h2>
+        <form>
+            <div class="general" class="form-group">
+                <h2 class="p-3 mb-2 bg-dark text-white">Registrar Actividades</h2>
+
                 <!-- Section to set the title of the activity -->
-                <div id="conteinertitle">
-                    <h3>Titulo de la Actividad</h3>
+                <div class="titleact">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Titulo de la Actividad</h3>
                     <input type="text" class="form-control" id="title" placeholder="Título de la actividad">
                 </div>
+
                 <!--Section to set the dificulty of the activity-->
-                    <h3>Nivel de Dificultad</h3>
-                <div id="conteinerage" class="radio">                    
-                    <label>
-                        <input type="radio" name="radio" value="low" checked>
-                        0-5
-                    </label>
-                    <label>
-                        <input type="radio" name="radio" value="medium">
-                        6-10
-                    </label>
-                    <label>
-                        <input type="radio" name="radio" value="high">
-                        11-15
-                    </label>
-                    <label>
-                        <input type="radio" name="radio" value="upper">
-                        16-20
-                    </label>
+                    <h3 class="p-3 mb-2 bg-dark text-white">Edad Máxima</h3>
+                <div class="ageact">                   
+                    <input type="range"  min="0" max="18" value="9" id="slider" class="custom-range" oninput="OutputId.value= slider.value"">   
+                    <output id="OutputId">9</output>
                 </div>
+
                 <!--Section to set the area where the activity belongs-->
-                <div id="conteinerarea">
-                    <h3>Área de la actividad</h3>
-                    <select class="form-control form-control-lg">
-                        <option>Area 1</option>
-                        <option>Area 2</option>
-                    </select>
+                <div class="areaact">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Área de la actividad</h3>
+                    <input type="text" class="form-control" placeholder="Escriba el área de la actividad">
                 </div>
+
                 <!--Section to define the naps-->
-                <div id="conteinernaps" maxlenght="150">
-                    <h3>Tips</h3>
+                <div class="napsact" maxlenght="150">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Tips</h3>
                     <input type="text" class="form-control" id="naps" placeholder="Ingrese los tips de trabajo">
                 </div>
+
                 <!--Section to define the duration of the activity-->
-                <div id="conteinertime">
-                    <h3>Duración de la Actividad</h3>
-                    <input type="textarea" class="form-control" id="time" placeholder="Ingrese la duración de la actividad en minutos">
+                <div class="timeact">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Duración de la Actividad</h3>
+                    <input type="time" class="form-control" min="00:00" max="23:59">
                 </div>
+
                 <!--Section to set a short description of the activity-->
-                <div id="conteinerresume">
-                    <h3>Resumen de la actividad</h3>
-                    <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="5" cols="40"></textarea>
+                <div class="resumeact">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Resumen de la actividad</h3>
+                    <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="2" cols="40"></textarea>
                 </div>
-                <div id="conteinerdescription">
+
+                <div class="descriptionact">
                 <!--Section to set a long description of the activity-->
-                    <h3>Descripción</h3>
-                    <textarea class="form-control" id="description " placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="10" cols="40"></textarea>
+                    <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
+                    <textarea class="form-control" id="description " placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="5" cols="40"></textarea>
                 </div>
+
                 <!--Section to add aditionals files-->
-                <div id="conteinerfiles">
-                    <h3>Archivos Adjuntos</h3>
-                    <input type="file">
+                <div class="filesact">
+                    <h3 class="p-3 mb-2 bg-dark text-white">Archivos Adjuntos</h3>
+                    <input type="file" id="file" style="display:none;" />
+                    <button id="button" class="btn" name="button" value="Upload" onclick="thisFileUpload();">Upload</button>
                 </div>
+
                 <!--Button created to send the information of the form-->
-                <div id="conteinerbutton">
-                        <button type="submit" class="btn btn-info btn-block">ENVIAR</button>
+                <div class="buttonsend">
+                        <button type="submit" class="btn btn-success btn-rounded">ENVIAR</button>
                 </div>
             </div>
             

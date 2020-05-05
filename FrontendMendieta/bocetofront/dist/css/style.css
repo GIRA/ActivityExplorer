@@ -1,0 +1,93 @@
+*{
+    box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background: url(img//des.jpg) no-repeat;
+  background-size: cover;
+  height: 950px;
+}
+.general{
+  width: 750px;
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  transform: translate(-25%, -15%);
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+label{
+    font-size: 25px;
+}
+
+#description{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 200px;
+}
+
+h3{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+    height: 45px;
+    border-bottom: cadetblue solid 2px;
+}
+h2{
+    text-align: center;
+}
+
+#slider{
+  width: 100%;
+  height: 15px;
+  -webkit-appearance: none;
+}
+#slider::-webkit-slider-thumb{
+  background-color: cadetblue;
+  border-color: black;
+  cursor: pointer;
+}
+output{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  margin-left: 50%;
+}
+.btn{
+  border: 2px solid gray;
+  color: gray;
+  background-color: lightgray;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 45%;
+  margin-right: 50%;
+}
+
+.files:hover{
+cursor: pointer;
+}
+.files{
+  border: 2px solid gray;
+  color: gray;
+  background-color: lightgray;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 45%;
+  margin-right: 50%;
+}
+
+.filesact input[type=file]{
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
