@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Full Quill Editor</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="language" content="english">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="lib\quill\quill.snow.css">
+
+    <style>
+        body>#textEditor-container {
+            margin: 50px auto;
+            max-width: 720px;
+        }
+        
+        #editor-container {
+            height: 350px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="textEditor-container">
+        <div id="toolbar-container">
+            <span class="ql-formats">
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-script" value="sub"></button>
+                <button class="ql-script" value="super"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-header" value="1"></button>
+                <button class="ql-header" value="2"></button>
+                <button class="ql-header" value="3">H3</button>
+                <button class="ql-header" value="4">H4</button>
+                <button class="ql-header" value="5">H5</button>
+                <button class="ql-header" value="6">H6</button>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-indent" value="-1"></button>
+                <button class="ql-indent" value="+1"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-direction" value="rtl"></button>
+                <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-video"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-clean"></button>
+                <button id="save-button" onclick="GetHTML()">Save</button>
+            </span>
+        </div>
+        <br>
+        <div id="editor-container"></div>
+    </div>
+
+    <script src=lib\quill\quill.min.js></script>
+
+    <script>
+        var editor = new Quill('#editor-container', {
+            modules: {
+                formula: false,
+                syntax: true,
+                toolbar: '#toolbar-container',
+            },
+            theme: 'snow',
+        });
+
+        function GetHTML() {
+            var html = document.querySelector('.ql-editor').innerHTML;
+            console.log(html);
+
+        }
+    </script>
+</body>
+
+</html>
