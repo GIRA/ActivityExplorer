@@ -8,7 +8,7 @@
     <meta name="language" content="english">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="lib\quill\quill.snow.css">
+    <link rel="stylesheet" href="lib\css\quill.snow.css">
 
     <style>
         body>#textEditor-container {
@@ -81,8 +81,8 @@
         </div>
     </div>
 
-    <script src="lib\highlight.pack.js"></script>
-    <script src=lib\quill\quill.min.js></script>
+    <script src='lib\js\highlight.pack.js'></script>
+    <script src='lib\js\quill.min.js'></script>
     <script>
         var quill = new Quill('#editor-container', {
             modules: {
@@ -98,11 +98,11 @@
         quill.on('text-change', function(delta) {
             var contents = quill.getContents();
             localStorage.setItem('delta', JSON.stringify(contents, null, 2));
-            console.log('contents', contents);
             var html = "contents = " + JSON.stringify(contents, null, 2);
-            console.log('change', delta)
             html = html + "<br>" + "change = " + JSON.stringify(delta, null, 2);
             container.innerHTML = html;
+            console.log('contents', contents);
+            console.log('change', delta)
         });
 
         //Load the json saved into local storage
