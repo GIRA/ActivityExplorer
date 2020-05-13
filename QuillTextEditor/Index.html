@@ -72,7 +72,6 @@
             </span>
             <span class="ql-formats">
                 <button class="ql-clean"></button>
-                <button id="save-button" onclick="GetHTML()">Save</button>
             </span>
         </div>
         <br>
@@ -84,45 +83,32 @@
 
     <script src="lib\highlight.pack.js"></script>
     <script src=lib\quill\quill.min.js></script>
-
     <script>
         var quill = new Quill('#editor-container', {
             modules: {
-                formula: false,
                 syntax: true,
                 toolbar: '#toolbar-container',
             },
+            placeholder: 'Write here ...',
             theme: 'snow',
         });
 
-        /*function GetHTML() {
-            var html = document.querySelector('.ql-editor').innerHTML;
-            localStorage.setItem('html', html);
-            console.log(delta);
-        }*/
-
-
-        //Save delta content and show changes.
+        //Save delta content in local storage and show it changes
         container = document.querySelector('#delta-container');
         quill.on('text-change', function(delta) {
             var contents = quill.getContents();
             localStorage.setItem('delta', JSON.stringify(contents, null, 2));
             console.log('contents', contents);
             var html = "contents = " + JSON.stringify(contents, null, 2);
-            if (delta) {
-                console.log('change', delta)
-                html = "change = " + JSON.stringify(delta, null, 2) + "\n\n" + html;
-            }
+            console.log('change', delta)
+            html = html + "<br>" + "change = " + JSON.stringify(delta, null, 2);
             container.innerHTML = html;
         });
 
-        quill.onload = function() {
-            var contents = quill.setContents(localStorage.getItem('delta'));
-        };
-
-        object.addEventListener('load', () => {
-            var contents = quill.setContents(localStorage.getItem('delta'))
-        });
+        //Load the json saved into local storage
+        window.onload = function() {;
+            quill.setContents(JSON.parse(localStorage.getItem('delta')));
+        }
     </script>
 </body>
 
