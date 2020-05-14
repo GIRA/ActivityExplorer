@@ -29,22 +29,28 @@ namespace Login
             services.AddDbContext<CAETIContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            services.AddIdentity<SystemUser, IdentityRole>()
+             .AddEntityFrameworkStores<CAETIContext>()
+             .AddDefaultTokenProviders();
+
+          
+            services.Configure<IdentityOptions>(config =>
             {
                 config.Password.RequireDigit = true;
                 config.Password.RequireUppercase = true;
                 config.Password.RequiredLength = 8;
                 config.Password.RequireNonAlphanumeric = false;
 
-            })
-             .AddEntityFrameworkStores<CAETIContext>()
-             .AddDefaultTokenProviders();
+            });
+            services.AddMvcCore();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -60,7 +66,6 @@ namespace Login
 
             app.UseRouting();
 
-            app.UseAuthentication();
 
             app.UseAuthorization();
 
