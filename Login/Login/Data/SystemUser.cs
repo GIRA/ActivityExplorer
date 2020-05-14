@@ -1,68 +1,48 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Login.Data
 {
-    public partial class SystemUser
+    public partial class SystemUser : IdentityUser<string>
     {
 
         public SystemUser()
         {
-            Login = new HashSet<Login>();
+
         }
 
-        public SystemUser(int id, string name, string lastName, string city, string dni, string email, string phone, string institution, string image, string password)
+        public SystemUser(string id, string name, string lastName, string city, string dni, string email, string phone, string institution, string image, string password)
         {
-            this.SystemUserId = id;
-            this.SystemUserName = name;
-            this.SystemUserLastName = lastName;
-            this.SystemUserCity = city;
-            this.SystemUserDni = dni;
-            this.SystemUserEmail = email;
-            this.SystemUserPhone = phone;
-            this.SystemUserInstitution = institution;
-            this.SystemUserImage = image;
-            this.SystemUserPassword = password;
+            this.Id = id;
+            this.FirstName = name;
+            this.LastName = lastName;
+            this.UserName = name + lastName;
+            this.City = city;
+            this.Dni = dni;
+            this.Email = email;
+            this.PhoneNumber = phone;
+            this.Institution = institution;
+            this.ImageFileName = image;
+
+            PasswordHasher<SystemUser> passwordHasher = new PasswordHasher<SystemUser>();
+            this.PasswordHash = passwordHasher.HashPassword(this, password);
         }
 
-        public int SystemUserId { get; set; }
+        public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "Name")]
-        public string SystemUserName { get; set; }
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "Last Name")]
-        public string SystemUserLastName { get; set; }
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "City")]
-        public string SystemUserCity { get; set; }
+        public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "DNI")]
-        public string SystemUserDni { get; set; }
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "Email")]
-        [DataType(DataType.EmailAddress)]
-        public string SystemUserEmail { get; set; }
+        public string City { get; set; }
 
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "Phone Number")]
-        [DataType(DataType.PhoneNumber)]
-        public string SystemUserPhone { get; set; }
+        public string Dni { get; set; }
 
-        [Display(Name = "Institution")]
-        public string SystemUserInstitution { get; set; }
+        public string Institution { get; set; }
 
-        [Display(Name = "Image")]
-        public string SystemUserImage { get; set; }
-
-        [Required(ErrorMessage = "Mandatory")]
-        [Display(Name = "Last Name")]
-        [DataType(DataType.Password)]
-        public string SystemUserPassword { get; set; }
-
-        public virtual ICollection<Login> Login { get; set; }
+        public string ImageFileName { get; set; }
+        
     }
 }
