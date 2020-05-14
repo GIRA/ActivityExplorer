@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Login.Data;
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Identity;
+using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.Options;
+using Login.Data;
+using Login.Models;
 
 namespace Login.Controllers
 {
@@ -16,10 +19,13 @@ namespace Login.Controllers
         public static CAETIContext caetiContext;
         public static SignInManager<SystemUser> signInManager;
         public static UserManager<SystemUser> userManager;
-        public AccountController()
+        public AccountController(CAETIContext context, UserManager<SystemUser> user, SignInManager<SystemUser> signIn)
         {
-           caetiContext = new CAETIContext();
+            caetiContext = context;
+            userManager = user;
+            signInManager = signIn;
         }
+
         // GET: Register
         public ActionResult Index()
         {
@@ -41,26 +47,32 @@ namespace Login.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SystemUser systemUser)
+        public async Task<ActionResult> Create(RegisterViewModel registerViewModel) 
         {
             try
             {
+                SystemUser systemUser = new SystemUser(registerViewModel.Id, registerViewModel.FirstName, registerViewModel.LastName,
+                    registerViewModel.City, registerViewModel.Dni, registerViewModel.Email,
+                    registerViewModel.PhoneNumber, registerViewModel.Institution,
+                    registerViewModel.ImageFileName, registerViewModel.Password);
+
                 if (caetiContext.SystemUser.Count() == 0)
                 {
-                    systemUser.SystemUserId = 0;
+                    systemUser.Id = "0";
                 }
                 else
                 {
-                    systemUser.SystemUserId = caetiContext.SystemUser.Max(u => u.SystemUserId) + 1;
-                }                
+                    systemUser.Id = (Convert.ToInt32(caetiContext.SystemUser.Max(u => u.Id)) + 1).ToString();
+                }
+
+                //await userManager.AddPasswordAsync(systemUser, registerViewModel.Password);
+                await userManager.UpdateSecurityStampAsync(systemUser);
                 caetiContext.SystemUser.Add(systemUser);
-                caetiContext.SaveChanges();
-                signInManager.SignInAsync(systemUser, false);
+                await caetiContext.SaveChangesAsync();
                 return Redirect("/Home/Index");
             }
-            catch(Exception ex)
+            catch(Exception ex) 
             {
-                string message = ex.Message;
                 return View();
             }
         }
