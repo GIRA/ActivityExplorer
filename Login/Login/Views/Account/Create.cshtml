@@ -1,61 +1,59 @@
-﻿@model Login.Data.SystemUser
+﻿@model Login.Models.RegisterViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>SystemUser</h4>
+<h1>Register</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SystemUserName" class="control-label"></label>
-                <input asp-for="SystemUserName" class="form-control" />
-                <span asp-validation-for="SystemUserName" class="text-danger"></span>
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserLastName" class="control-label"></label>
-                <input asp-for="SystemUserLastName" class="form-control" />
-                <span asp-validation-for="SystemUserLastName" class="text-danger"></span>
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserCity" class="control-label"></label>
-                <input asp-for="SystemUserCity" class="form-control" />
-                <span asp-validation-for="SystemUserCity" class="text-danger"></span>
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserDni" class="control-label"></label>
-                <input asp-for="SystemUserDni" class="form-control" />
-                <span asp-validation-for="SystemUserDni" class="text-danger"></span>
+                <label asp-for="Dni" class="control-label"></label>
+                <input asp-for="Dni" class="form-control" />
+                <span asp-validation-for="Dni" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserEmail" class="control-label"></label>
-                <input asp-for="SystemUserEmail" class="form-control" />
-                <span asp-validation-for="SystemUserEmail" class="text-danger"></span>
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserPhone" class="control-label"></label>
-                <input asp-for="SystemUserPhone" class="form-control" />
-                <span asp-validation-for="SystemUserPhone" class="text-danger"></span>
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserInstitution" class="control-label"></label>
-                <input asp-for="SystemUserInstitution" class="form-control" />
-                <span asp-validation-for="SystemUserInstitution" class="text-danger"></span>
+                <label asp-for="Institution" class="control-label"></label>
+                <input asp-for="Institution" class="form-control" />
+                <span asp-validation-for="Institution" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserImage" class="control-label"></label>
-                <input asp-for="SystemUserImage" class="form-control" />
-                <span asp-validation-for="SystemUserImage" class="text-danger"></span>
+                <label asp-for="ImageFileName" class="control-label"></label>
+                <input asp-for="ImageFileName" class="form-control" />
+                <span asp-validation-for="ImageFileName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SystemUserPassword" class="control-label"></label>
-                <input asp-for="SystemUserPassword" class="form-control" />
-                <span asp-validation-for="SystemUserPassword" class="text-danger"></span>
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />                 
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
