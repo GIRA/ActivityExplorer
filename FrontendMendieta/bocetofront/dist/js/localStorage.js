@@ -29,6 +29,7 @@ function ReStorage(){
 
         var title= document.getElementById("title");
         var age= document.getElementById("slider");
+        var age2= document.getElementById("OutputId");
         var area= document.getElementById("area");
         var naps= document.getElementById("naps");
         var time= document.getElementById("time");
@@ -37,6 +38,7 @@ function ReStorage(){
 
         title.value=localStorage.getItem("Title");
         age.value=localStorage.getItem("Age");
+        age2.value= localStorage.getItem("Age");
         area.value=localStorage.getItem("Area", area.value);
         naps.value=localStorage.getItem("Naps", naps.value);
         time.value=localStorage.getItem("Time", time.value);
