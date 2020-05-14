@@ -5,13 +5,8 @@
         <title>Registrar actividad</title>
         <link rel="stylesheet" href="dist/css/bootstrap.css">
         <link rel="stylesheet" href="dist/css/style.css">
-        <script type="text/javascript" src="dist/js/jquery-3.5.0.min.js"></script>
         <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
-        <script>
-            function thisFileUpload() {
-                document.getElementById("file").click();
-            };
-    </script>
+        <script type="text/javascript" src="dist/js/localStorage.js"></script>
     </head>
     <body>
         <form>
@@ -27,14 +22,14 @@
                 <!--Section to set the dificulty of the activity-->
                     <h3 class="p-3 mb-2 bg-dark text-white">Edad Máxima</h3>
                 <div class="ageact">                   
-                    <input type="range"  min="0" max="18" value="9" id="slider" class="custom-range" oninput="OutputId.value= slider.value"">   
+                    <input type="range"  min="0" max="18" value="9" id="slider" class="custom-range" oninput="OutputId.value= slider.value">   
                     <output id="OutputId">9</output>
                 </div>
 
                 <!--Section to set the area where the activity belongs-->
                 <div class="areaact">
                     <h3 class="p-3 mb-2 bg-dark text-white">Área de la actividad</h3>
-                    <input type="text" class="form-control" placeholder="Escriba el área de la actividad">
+                    <input type="text" id="area" class="form-control" placeholder="Escriba el área de la actividad">
                 </div>
 
                 <!--Section to define the naps-->
@@ -46,7 +41,7 @@
                 <!--Section to define the duration of the activity-->
                 <div class="timeact">
                     <h3 class="p-3 mb-2 bg-dark text-white">Duración de la Actividad</h3>
-                    <input type="time" class="form-control" min="00:00" max="23:59">
+                    <input type="time" id="time" class="form-control" min="00:00" max="23:59">
                 </div>
 
                 <!--Section to set a short description of the activity-->
@@ -58,19 +53,19 @@
                 <div class="descriptionact">
                 <!--Section to set a long description of the activity-->
                     <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
-                    <textarea class="form-control" id="description " placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="5" cols="40"></textarea>
+                    <textarea class="form-control" id="desc" placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="5" cols="40"></textarea>
                 </div>
 
                 <!--Section to add aditionals files-->
                 <div class="filesact">
                     <h3 class="p-3 mb-2 bg-dark text-white">Archivos Adjuntos</h3>
-                    <input type="file" id="file" style="display:none;" />
-                    <button id="button" class="btn" name="button" value="Upload" onclick="thisFileUpload();">Upload</button>
+                    <input type="file"  class="files">
                 </div>
 
                 <!--Button created to send the information of the form-->
                 <div class="buttonsend">
-                        <button type="submit" class="btn btn-success btn-rounded">ENVIAR</button>
+                        <button type="submit" class="btn btn-success btn-rounded" onclick="Storage();">ENVIAR</button>
+                        <button type="button" class="btn" onclick="ReStorage();">Cargar</button>
                 </div>
             </div>
             
