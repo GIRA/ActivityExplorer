@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Activities</title>
+    <script>
+        function ComponentInitialization() {
+
+            let TextBox = document.getElementById("TextBox");
+            let TextBox2 = document.getElementById("TextBox2");
+            let BtnGet = document.getElementById("BtnGet");
+            let BtnGetId = document.getElementById("BtnGetId");
+            let BtnAdd = document.getElementById("BtnAdd");
+            let BtnMod = document.getElementById("BtnMod");
+            let BtnDelete = document.getElementById("BtnDelete");
+            let actions = requestHandler();
+            let tabla = document.getElementById("table");
+            let exampleActivity = { "Id": "6", "Area": "Educación", "Titulo": "Insertar robots", "Descripcion": "Inserción de la robótica en el Aula", "Duracion": "60 hrs" };
+
+            BtnGet.addEventListener("click", function () {
+                let result = actions.getActivities();
+                result.then(function (res) {
+                    console.log(res);
+                })
+                /*res.map((arg)=>{
+                             
+                });*/
+
+            });
+            function CreateRow() {
+                var row = document.createElement("TR");
+
+                var cell = document.createElement("TD");
+
+                cell.appendChild(document.createTextNode(arg.Id));
+                cell.appendChild(document.createTextNode(arg.Author));
+                cell.appendChild(document.createTextNode(arg.Area));
+                cell.appendChild(document.createTextNode(arg.Title));
+                cell.appendChild(document.createTextNode(arg.Institution));
+                cell.appendChild(document.createTextNode(arg.AgeMin));
+                cell.appendChild(document.createTextNode(arg.AgeMax));
+                cell.appendChild(document.createTextNode(arg.ShortDescp));
+                cell.appendChild(document.createTextNode(arg.Description));
+                cell.appendChild(document.createTextNode(arg.PublishingDate));
+                cell.appendChild(document)
+                cell.appendChild(document.createTextNode(arg.Duration));
+                cell.appendChild(document.createTextNode(arg.Files));
+
+                row.appendChild(cell);
+                tabla.appendChild(row);
+                document.body.insertAdjacentElement('beforeend', tabla);
+            }
+
+            BtnGetId.addEventListener("click", function () {
+                let result = actions.getActivityId(TextBox.value);
+                result.then(function (res) {
+                    console.log(res);
+                    //here will be the function that will remake the HTML document
+                })
+            });
+
+            BtnAdd.addEventListener("click", function () {
+                let activity = TextBox2.value;
+                debugger;
+                let result = actions.AddActivity(JSON.parse(activity));
+                result.then(function (res) {
+                    console.log(res);
+                    //here will be the function that will remake the HTML document
+                })
+            });
+
+            BtnMod.addEventListener("click", function () {
+                let Activityid = TextBox.value;
+                let activityMod = TextBox2.value;
+                let result = actions.ModifyActivity(Activityid, JSON.parse(activityMod));
+                debugger;
+                result.then(function (res) {
+                    console.log(res);
+                    //here will be the function that will make the HTML document
+                })
+            });
+
+            BtnDelete.addEventListener("click", function () {
+                let Activityid = TextBox.value;
+                let result = actions.DeleteActivity(Activityid);
+                debugger;
+                result.then(function (res) {
+                    console.log(res);
+                    //here will be the function that will make the HTML document
+                })
+            });
+        }
+
+
+//{"Id": "1", "Area": "artevisual", "Titulo": "Insertar robots", "Descripcion": "Inserción de la robótica en el Aula", "Duracion": "50 hrs"} para testear las consultas
+
+    </script>
+
+    <script>
+        function requestHandler() {
+            let operations = {};
+            const baseURL = 'https://localhost:44377';//cambiar con el localhost que les levante la api
+
+            operations.getActivities = function () {
+                try {
+                    let result = fetch(baseURL + '/api/Activity')
+                        .then(function (res) {
+                            if (res.ok) {
+                                console.log(res);
+                                //console.log(res.body);
+
+                                return res.json();
+                            } else {
+                                throw 'Nose se pudo hacer la peticion';
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    return result;
+                }
+                catch (error) {
+                }
+            }
+            operations.getActivityId = function (id) {
+                try {
+                    let result = fetch(baseURL + '/api/Activity/' + id)
+                        .then(function (res) {
+                            if (res.ok) {
+                                console.log(res);
+                                return res.json();
+                            } else {
+                                throw 'Nose se pudo hacer la peticion';
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    return result;
+                }
+                catch (error) {
+                }
+            }
+
+            operations.AddActivity = function (activity) {
+
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open("POST", baseURL + "/api/Activity", true)
+                    request.setRequestHeader('Accept', 'application/json');
+                    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    let data = JSON.stringify(activity);
+                    request.send(data);
+                    request.addEventListener("load", () => {
+                        resolve(data);
+                    });
+                });
+            };
+            operations.ModifyActivity = function (id, activity) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open("PATCH", baseURL + "/api/Activity/" + id, true);
+                    request.setRequestHeader("Content-Type", "application/json");
+                    request.setRequestHeader("Accept", "application/json");
+
+                    let data = JSON.stringify(activity);
+                    request.send(data)
+                    request.addEventListener("load", () => {
+                        resolve(request.response);
+                    });
+                });
+            };
+            operations.DeleteActivity = function (Id) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open("DELETE", baseURL + "/api/Activity/" + Id, true);
+                    request.send(null);
+                    request.addEventListener("load", () => {
+                        resolve(request.response);
+                    });
+                });
+
+            };
+            return operations;
+        }
+
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+</head>
+
+<body id="body" onload=ComponentInitialization()>
+    <h1>Api test</h1>
+    <form>
+        <input id="TextBox" type="text">
+        <input id="TextBox2" type="text" width="200 px" height="300 px">
+        <input id="BtnGet" type="button" value="Consultar todo">
+        <input id="BtnGetId" type="button" value="Consultar 1">
+        <input id="BtnAdd" type="button" value="Agregar Actividad">
+        <input id="BtnMod" type="button" value="Modificar">
+        <input id="BtnDelete" type="button" value="Eliminar">
+    </form>
+    <table id="table">
+        <th>Id</th>
+        <th>Autor</th>
+        <th>Área</th>
+        <th>Titulo</th>
+        <th>Institución</th>
+        <th>Edad Mínima</th>
+        <th>Edad Máxima</th>
+        <th>Descripción Corta</th>
+        <th>Descripción</th>
+        <th>Fecha Publicación</th>
+        <th>Fecha Modificación</th>
+    </table>
+</body>
+</html>
