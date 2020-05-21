@@ -8,6 +8,9 @@
         <script type="text/javascript" src="dist/js/jquery-3.5.0.min.js"></script>
         <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="dist/js/localStorage.js"></script>
+        <script src='dist\js\highlight.pack.js'></script>
+        <script src='dist\js\quill.min.js'></script>
+        <link rel="stylesheet" href="dist/css/quill.snow.css">
     </head>
     <body>
         <form>
@@ -50,12 +53,67 @@
                     <h3 class="p-3 mb-2 bg-dark text-white">Resumen de la actividad</h3>
                     <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="2" cols="40"></textarea>
                 </div>
-
                 <div class="descriptionact">
-                <!--Section to set a long description of the activity-->
-                    <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
-                    <textarea class="form-control" id="desc" placeholder="Ingrese la descripción de la actividad" maxlength="240" rows="5" cols="40"></textarea>
+                    <!--Section to set a long description of the activity-->
+                        <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
                 </div>
+                <!--EDITOR SECTION-->
+                <div id="textEditor-container">
+                    <div id="toolbar-container">
+                        <span class="ql-formats">
+                            <select class="ql-font"></select>
+                            <select class="ql-size"></select>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                            <button class="ql-strike"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <select class="ql-color"></select>
+                            <select class="ql-background"></select>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-script" value="sub"></button>
+                            <button class="ql-script" value="super"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-header" value="1"></button>
+                            <button class="ql-header" value="2"></button>
+                            <button class="ql-header" value="3">H3</button>
+                            <button class="ql-header" value="4">H4</button>
+                            <button class="ql-header" value="5">H5</button>
+                            <button class="ql-header" value="6">H6</button>
+                            <button class="ql-blockquote"></button>
+                            <button class="ql-code-block"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-list" value="ordered"></button>
+                            <button class="ql-list" value="bullet"></button>
+                            <button class="ql-indent" value="-1"></button>
+                            <button class="ql-indent" value="+1"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-direction" value="rtl"></button>
+                            <select class="ql-align"></select>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-link"></button>
+                            <button class="ql-image"></button>
+                            <button class="ql-video"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-clean"></button>
+                        </span>
+                    </div>
+                    <br>
+                    <div id="editor-container"></div>
+                    <div class="container" id="delta-container">
+                        <p>I contain the change information of the delta</p>
+                    </div>
+                </div>
+                <!--END OF THE SECTION-->
 
                 <!--Section to add aditionals files-->
                 <div class="filesact">
@@ -71,5 +129,8 @@
             </div>
             
         </form> 
+        <script>
+            QuillStorage();
+        </script>
     </body>
 </html>
