@@ -19,6 +19,8 @@ namespace Login.Controllers
         public static CAETIContext caetiContext;
         public static SignInManager<SystemUser> signInManager;
         public static UserManager<SystemUser> userManager;
+        public static RoleManager<SystemUserRole> roleManager;
+
         public AccountController(CAETIContext context, UserManager<SystemUser> user, SignInManager<SystemUser> signIn)
         {
             caetiContext = context;
@@ -67,6 +69,8 @@ namespace Login.Controllers
 
                 //await userManager.AddPasswordAsync(systemUser, registerViewModel.Password);
                 await userManager.UpdateSecurityStampAsync(systemUser);
+                //await signInManager.CreateUserPrincipalAsync(systemUser);
+                await signInManager.SignInAsync(systemUser, true);
                 caetiContext.SystemUser.Add(systemUser);
                 await caetiContext.SaveChangesAsync();
                 return Redirect("/Home/Index");
