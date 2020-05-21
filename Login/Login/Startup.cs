@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Login.Data;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.Extensions.Options;
 
 namespace Login
 {
@@ -29,7 +31,13 @@ namespace Login
             services.AddDbContext<CAETIContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<SystemUser, SystemUserRole>()
+            services.AddIdentity<SystemUser, SystemUserRole>(config =>
+            {
+            config.Password.RequireDigit = true;
+            config.Password.RequireUppercase = true;
+            config.Password.RequiredLength = 8;
+            config.Password.RequireNonAlphanumeric = false;
+            })            
              .AddEntityFrameworkStores<CAETIContext>()
              .AddDefaultTokenProviders();
 
