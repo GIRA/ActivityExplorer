@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Options;
 using Login.Data;
 using Login.Models;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace Login.Controllers
 {
@@ -38,6 +41,10 @@ namespace Login.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+        public ActionResult Login()
+        {
+            return View("Login");
         }
 
         // GET: Register/Create
@@ -76,6 +83,38 @@ namespace Login.Controllers
                 return Redirect("/Home/Index");
             }
             catch(Exception ex) 
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult>Login(LoginViewModel loginViewModel)
+        {
+            try
+            {
+                SystemUser systemUser = caetiContext.SystemUser.ToList().Find(x => x.Email == loginViewModel.Email);
+                PasswordHasher<SystemUser> passwordHasher = new PasswordHasher<SystemUser>();
+                if (passwordHasher.VerifyHashedPassword(systemUser, systemUser.PasswordHash, loginViewModel.Password) == PasswordVerificationResult.Failed) throw new Exception("Login Failed.");                
+                await signInManager.SignInAsync(systemUser, true);
+                return Redirect("/Home/Index");
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            
+        }
+
+        public async Task<ActionResult> Logout()
+        {
+            try
+            {
+                await signInManager.SignOutAsync();
+                return Redirect("/Home/Index");
+            }
+            catch (Exception ex)
             {
                 return View();
             }
