@@ -29,7 +29,7 @@ namespace Login
             services.AddDbContext<CAETIContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<SystemUser, IdentityRole>()
+            services.AddIdentity<SystemUser, SystemUserRole>()
              .AddEntityFrameworkStores<CAETIContext>()
              .AddDefaultTokenProviders();
 
