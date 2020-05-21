@@ -50,3 +50,31 @@ function ReStorage(){
       alert("El browser no soporta LocalStorage");
   }   
 }
+
+function QuillStorage(){
+  var quill = new Quill('#editor-container', {
+    modules: {
+        syntax: true,
+        toolbar: '#toolbar-container',
+    },
+    placeholder: 'Write here ...',
+    theme: 'snow',
+  });
+  
+  //Save delta content in local storage and show it changes
+  container = document.querySelector('#delta-container');
+  quill.on('text-change', function(delta) {
+    var contents = quill.getContents();
+    localStorage.setItem('delta', JSON.stringify(contents, null, 2));
+    var html = "contents = " + JSON.stringify(contents, null, 2);
+    html = html + "<br>" + "change = " + JSON.stringify(delta, null, 2);
+    container.innerHTML = html;
+    console.log('contents', contents);
+    console.log('change', delta)
+  });
+  
+  //Load the json saved into local storage
+  window.onload = function() {;
+    quill.setContents(JSON.parse(localStorage.getItem('delta')));
+  }
+}
