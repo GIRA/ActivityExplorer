@@ -1,84 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Registrar actividad</title>
-        <link rel="stylesheet" href="dist/css/bootstrap.css">
-        <link rel="stylesheet" href="dist/css/style.css">
-        <script type="text/javascript" src="dist/js/jquery-3.5.0.min.js"></script>
-        <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="dist/js/localStorage.js"></script>
-        <script src='dist\js\highlight.pack.js'></script>
-        <script src='dist\js\quill.min.js'></script>
-        <link rel="stylesheet" href="dist/css/quill.snow.css">
-    </head>
-    <body>
-        <form>
-            <div class="general" class="form-group">
-                <h2 class="p-3 mb-2 bg-dark text-white">Registrar Actividades</h2>
 
-                <!-- Section to set the title of the activity -->
-                <div class="titleact">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Titulo de la Actividad</h3>
-                    <input type="text" class="form-control" id="title" placeholder="Título de la actividad">
-                </div>
+<head>
+    <meta charset="utf-8">
+    <title>Registrar actividad</title>
+    <link rel="stylesheet" href="dist/css/bootstrap.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+    <script type="text/javascript" src="dist/js/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="dist/js/bootstrap.min.js"></script>
+    <script src='dist\js\highlight.pack.js'></script>
+    <script src='dist\js\quill.min.js'></script>
+    <script type="text/javascript" src="dist/js/localStorage.js"></script>
+    <link rel="stylesheet" href="dist/css/quill.snow.css">
+</head>
 
-                <!--Section to set the dificulty of the activity-->
-                    <h3 class="p-3 mb-2 bg-dark text-white">Edad Máxima</h3>
-                <div class="ageact">                   
-                    <input type="range"  min="0" max="18" value="9" id="slider" class="custom-range" oninput="OutputId.value= slider.value">   
-                    <output id="OutputId">9</output>
-                </div>
+<body>
+    <form>
+        <div class="general" class="form-group">
+            <h2 class="p-3 mb-2 bg-dark text-white">Registrar Actividades</h2>
 
-                <!--Section to set the area where the activity belongs-->
-                <div class="areaact">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Área de la actividad</h3>
-                    <input type="text" id="area" class="form-control" placeholder="Escriba el área de la actividad">
-                </div>
+            <!-- Section to set the title of the activity -->
+            <div class="titleact">
+                <h3 class="p-3 mb-2 bg-dark text-white">Titulo de la Actividad</h3>
+                <input type="text" class="form-control" id="title" placeholder="Título de la actividad">
+            </div>
 
-                <!--Section to define the naps-->
-                <div class="napsact" maxlenght="150">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Tips</h3>
-                    <input type="text" class="form-control" id="naps" placeholder="Ingrese los tips de trabajo">
-                </div>
+            <!--Section to set the dificulty of the activity-->
+            <h3 class="p-3 mb-2 bg-dark text-white">Edad Máxima</h3>
+            <div class="ageact">
+                <input type="range" min="0" max="18" value="9" id="slider" class="custom-range" oninput="OutputId.value= slider.value">
+                <output id="OutputId">9</output>
+            </div>
 
-                <!--Section to define the duration of the activity-->
-                <div class="timeact">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Duración de la Actividad</h3>
-                    <input type="time" id="time" class="form-control" min="00:00" max="23:59">
-                </div>
+            <!--Section to set the area where the activity belongs-->
+            <div class="areaact">
+                <h3 class="p-3 mb-2 bg-dark text-white">Área de la actividad</h3>
+                <input type="text" id="area" class="form-control" placeholder="Escriba el área de la actividad">
+            </div>
 
-                <!--Section to set a short description of the activity-->
-                <div class="resumeact">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Resumen de la actividad</h3>
-                    <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="2" cols="40"></textarea>
-                </div>
-                <div class="descriptionact">
-                    <!--Section to set a long description of the activity-->
-                        <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
-                </div>
-                <!--EDITOR SECTION-->
-                <div id="textEditor-container">
-                    <div id="toolbar-container">
-                        <span class="ql-formats">
+            <!--Section to define the naps-->
+            <div class="napsact" maxlenght="150">
+                <h3 class="p-3 mb-2 bg-dark text-white">Tips</h3>
+                <input type="text" class="form-control" id="naps" placeholder="Ingrese los tips de trabajo">
+            </div>
+
+            <!--Section to define the duration of the activity-->
+            <div class="timeact">
+                <h3 class="p-3 mb-2 bg-dark text-white">Duración de la Actividad</h3>
+                <input type="time" id="time" class="form-control" min="00:00" max="23:59">
+            </div>
+
+            <!--Section to set a short description of the activity-->
+            <div class="resumeact">
+                <h3 class="p-3 mb-2 bg-dark text-white">Resumen de la actividad</h3>
+                <textarea class="form-control" id="resume" placeholder="Ingrese el resumen de la actividad" maxlength="240" rows="2" cols="40"></textarea>
+            </div>
+            <div class="descriptionact">
+                <!--Section to set a long description of the activity-->
+                <h3 class="p-3 mb-2 bg-dark text-white">Descripción</h3>
+            </div>
+            <!--EDITOR SECTION-->
+            <div id="textEditor-container">
+                <div id="toolbar-container">
+                    <span class="ql-formats">
                             <select class="ql-font"></select>
                             <select class="ql-size"></select>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-bold"></button>
                             <button class="ql-italic"></button>
                             <button class="ql-underline"></button>
                             <button class="ql-strike"></button>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <select class="ql-color"></select>
                             <select class="ql-background"></select>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-script" value="sub"></button>
                             <button class="ql-script" value="super"></button>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-header" value="1"></button>
                             <button class="ql-header" value="2"></button>
                             <button class="ql-header" value="3">H3</button>
@@ -88,49 +90,60 @@
                             <button class="ql-blockquote"></button>
                             <button class="ql-code-block"></button>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-list" value="ordered"></button>
                             <button class="ql-list" value="bullet"></button>
                             <button class="ql-indent" value="-1"></button>
                             <button class="ql-indent" value="+1"></button>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-direction" value="rtl"></button>
                             <select class="ql-align"></select>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-link"></button>
                             <button class="ql-image"></button>
                             <button class="ql-video"></button>
                         </span>
-                        <span class="ql-formats">
+                    <span class="ql-formats">
                             <button class="ql-clean"></button>
                         </span>
-                    </div>
-                    <br>
-                    <div id="editor-container"></div>
-                    <div class="container" id="delta-container">
-                        <p>I contain the change information of the delta</p>
-                    </div>
                 </div>
-                <!--END OF THE SECTION-->
-
-                <!--Section to add aditionals files-->
-                <div class="filesact">
-                    <h3 class="p-3 mb-2 bg-dark text-white">Archivos Adjuntos</h3>
-                    <input type="file"  class="files">
-                </div>
-
-                <!--Button created to send the information of the form-->
-                <div class="buttonsend">
-                        <button type="submit" class="btn btn-success btn-rounded" onclick="Storage();">ENVIAR</button>
-                        <button type="button" class="btn" onclick="ReStorage();">Cargar</button>
+                <br>
+                <div id="editor-container"></div>
+                <div class="container" id="delta-container">
                 </div>
             </div>
-            
-        </form> 
-        <script>
-            QuillStorage();
-        </script>
-    </body>
+            <!--END OF THE SECTION-->
+
+            <!--Section to add aditionals files-->
+            <div class="filesact">
+                <h3 class="p-3 mb-2 bg-dark text-white">Archivos Adjuntos</h3>
+                <input type="file" class="files">
+            </div>
+
+            <!--Button created to send the information of the form-->
+            <div class="buttonsend">
+                <button type="submit" class="btn btn-success btn-rounded" onclick="Save();">Enviar</button>
+                <button type="button" class="btn" onclick="Load();">Cargar</button>
+            </div>
+        </div>
+
+    </form>
+    <script>
+        window.onload = () => {
+            var editor = document.getElementById("editor-container");
+            quill = new Quill(editor, {
+                modules: {
+                    syntax: true,
+                    toolbar: '#toolbar-container',
+                },
+                placeholder: 'Write here ...',
+                theme: 'snow',
+            });
+            window.quillEditor = quill;
+        }
+    </script>
+</body>
+
 </html>
