@@ -1,22 +1,16 @@
 function Storage(){
   if(typeof(Storage)!="undefined")
   {
-
-        var title= document.getElementById("title");
-        var age= document.getElementById("slider");
-        var area= document.getElementById("area");
-        var naps= document.getElementById("naps");
-        var time= document.getElementById("time");
-        var resume= document.getElementById("resume");
-        var desc= document.getElementById("desc");
-
-        localStorage.setItem("Title", title.value);
-        localStorage.setItem("Age", age.value);
-        localStorage.setItem("Area", area.value);
-        localStorage.setItem("Naps", naps.value);
-        localStorage.setItem("Time", time.value);
-        localStorage.setItem("Resume", resume.value);
-        localStorage.setItem("Description", desc.value);
+        var object={
+          title: document.getElementById("title").value,
+          age: document.getElementById("slider").value,
+          area: document.getElementById("area").value,
+          naps: document.getElementById("naps").value,
+          time: document.getElementById("time").value,
+          resume: document.getElementById("resume").value
+        };
+        var stringobject= JSON.stringify(object);
+        localStorage.setItem("object", stringobject);
 
   }
   else{
@@ -26,25 +20,23 @@ function Storage(){
 function ReStorage(){
   if(typeof(Storage)!="undefined")
   {
-
-        var title= document.getElementById("title");
+        var get= JSON.parse(localStorage.getItem("object"));
+        //elementos del form
+        var tit= document.getElementById("title");
         var age= document.getElementById("slider");
         var age2= document.getElementById("OutputId");
         var area= document.getElementById("area");
         var naps= document.getElementById("naps");
         var time= document.getElementById("time");
         var resume= document.getElementById("resume");
-        var desc= document.getElementById("desc");
-
-        title.value=localStorage.getItem("Title");
-        age.value=localStorage.getItem("Age");
-        age2.value= localStorage.getItem("Age");
-        area.value=localStorage.getItem("Area", area.value);
-        naps.value=localStorage.getItem("Naps", naps.value);
-        time.value=localStorage.getItem("Time", time.value);
-        resume.value=localStorage.getItem("Resume", resume.value);
-        desc.value= localStorage.getItem("Description", desc.value);
-
+        //setted the values from the json
+        tit.value= get.title;
+        age.value= get.age;
+        age2.value= get.age;
+        area.value= get.area;
+        naps.value= get.naps;
+        time.value= get.time;
+        resume.value= get.value;
   }
   else{
       alert("El browser no soporta LocalStorage");
