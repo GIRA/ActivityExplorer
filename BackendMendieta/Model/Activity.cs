@@ -10,7 +10,7 @@ namespace Model
 		{
 		}
 
-		public Activity(string id, string author, string area, string title, string institution, int ageMin, int ageMax, int shortDescp, string description, string files, string duration, string naps, DateTime publishingDate, DateTime modifiedDate)
+		public Activity(string id, string author, string area, string title, string institution, int ageMin, int ageMax, string shortDescp, string description, string files, string duration, string naps, DateTime publishingDate, DateTime modifiedDate)
 		{
 			Id = id;
 			Author = author;
@@ -35,12 +35,12 @@ namespace Model
 		public string Institution { get; set; }
 		public int AgeMin { get; set; }
 		public int AgeMax { get; set; }
-		public int ShortDescp { get; set; }
+		public string ShortDescp { get; set; }
 		public string Description { get; set; }
 		public string Files { get; set; }
 		public string Duration { get; set; }
 		public string Naps { get; set; }
-		public DateTime PublishingDate { get; set; }
+		public DateTime PublishingDate { get; set; } 
 		public DateTime ModifiedDate { get; set; }
 
 	}

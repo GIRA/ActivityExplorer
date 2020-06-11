@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWeb", "ApiWeb\ApiWeb.csproj", "{ECA11977-ED87-4879-AC37-BE838B75073F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bussines", "Bussines\Bussines.csproj", "{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Bussines\Services.csproj", "{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

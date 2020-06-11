@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccessData\AccessData.csproj" />
+    <ProjectReference Include="..\Bussines\Services.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 

@@ -6,43 +6,68 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Services;
+using AccessData;
 
 namespace ApiWeb.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class ActivityController : ControllerBase
     {
-        static List<Activity> activities = new List<Activity>();
 
-        static ActivityController()
+        public static AppDbContext Context;
+
+        public static ActivityService activityService;
+        
+        public ActivityController(AppDbContext context)
         {
-            Activity activity1 = new Activity();
-            Activity activity2 = new Activity();
+            Context = context;
+            activityService = new ActivityService(Context);
 
-            activity1.Id = "1";            
-            activity2.Id = "2";
+            //Activity activity1 = new Activity();
+            //Activity activity2 = new Activity();
 
-            activities.Add(activity1);
-            activities.Add(activity2);
+            //activity1.Id = "1";
+            //activity1.Area = "Robotica";
+            //activity2.Id = "2";
+            //activity2.Area = "Programacion c";
+
+            //activityService.Add(activity1);
+            //activityService.Add(activity2);
         }
-        // G   ET: api/Activity
+        // GET: api/Activity
 
         [EnableCors("PolicyCors")]
         [HttpGet]
-        public IEnumerable<Activity> Get()
+        public List<Activity> Get()
         {
-            return activities;
+            try
+            {
+                return activityService.GetActivities(null);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [EnableCors("PolicyCors")]
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "Get")]
-        public Activity Get(string id)
+        public List<Activity> Get(string id)
         {
-            return activities.Find(x => string.Compare(x.Id, id) == 0);
+            try
+            {
+                return activityService.GetActivities(id);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
 
        
@@ -55,7 +80,10 @@ namespace ApiWeb.Controllers
             {
                 if (activity != null)
                 {
-                    activities.Add(activity);
+                    //activities.Add(activity);
+                    
+                    activityService.Add(activity);
+
                     confirmation = "inserted";
                 };
             }
@@ -74,15 +102,7 @@ namespace ApiWeb.Controllers
             //Activity activity=new Activity();
             try
             {
-                Activity activity = activities.Find(x => string.Compare(x.Id, id) == 0);
-                if (activity != null && activityModify != null)
-                {
-                    activities.Remove(activity);
-                    activityModify.Id = id;
-                    activities.Add(activityModify);
-
-                    confirmation = "Modified";
-                }
+                activityService.Modify(activityModify);
             }
             catch (Exception)
             {
@@ -98,13 +118,8 @@ namespace ApiWeb.Controllers
             string confirmation = "Not found";
             try
             {
-                Activity activityDeleted = activities.Find(x => x.Id == id);
-                if (activityDeleted != null)
-                {
-                    activities.Remove(activityDeleted);
-                    confirmation = "Deleted";
-                }
-
+                activityService.Delete(id);
+                confirmation = "Deleted";
             }
             catch (Exception)
             {

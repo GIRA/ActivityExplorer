@@ -9,7 +9,6 @@ namespace Login.Data
     {
         public CAETIContext()
         {
-
         }
 
         public CAETIContext(DbContextOptions<CAETIContext> options)

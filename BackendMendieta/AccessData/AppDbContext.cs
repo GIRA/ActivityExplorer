@@ -9,23 +9,28 @@ using System.Reflection;
 
 namespace AccessData
 {
-    public class AppDbContext:DbContext
+    public partial class AppDbContext: DbContext
     {
+        public virtual DbSet<Activity> Activity { get; set; }// esta es la tabla Activity, con esta variable haremos las consultas
+        public AppDbContext() 
+        {
+        }
         public  AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
         {
         }
 
-        public DbSet<Activity> Activity { get; set; }
 
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //   => options.UseSqlServer("Server=DESKTOP-SPT2LHA;Database=ProyectoMendieta;Trusted_Connection=True;");
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+          => options.UseSqlServer("Server=DESKTOP-SPT2LHA;Database=ProyectoMendieta;Trusted_Connection=True;");
 
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
             //modelBuilder.ApplyConfiguration(new ActivityConfiguration());
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            base.OnModelCreating(modelBuilder);
          }
 
     }
