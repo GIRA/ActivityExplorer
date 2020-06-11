@@ -16,6 +16,8 @@ using System.Net;
 using AccessData;
 using Model;
 using Microsoft.EntityFrameworkCore;
+using Login.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace ApiWeb
 {
@@ -46,6 +48,28 @@ namespace ApiWeb
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
                    Configuration.GetConnectionString("MendietaBd")));
 
+            services.AddDbContext<CAETIContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("MendietaBd")));
+            services.AddIdentity<SystemUser, SystemUserRole>(config =>
+            {
+                config.Password.RequireDigit = true;
+                config.Password.RequireUppercase = true;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireNonAlphanumeric = false;
+            })
+             .AddEntityFrameworkStores<CAETIContext>()
+             .AddDefaultTokenProviders();
+
+
+            services.Configure<IdentityOptions>(config =>
+            {
+                config.Password.RequireDigit = true;
+                config.Password.RequireUppercase = true;
+                config.Password.RequiredLength = 8;
+                config.Password.RequireNonAlphanumeric = false;
+
+            });
 
             services.AddControllersWithViews();
             services.AddControllers();
@@ -54,6 +78,8 @@ namespace ApiWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
