@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Login.Data
+namespace AccessData
 {
     public partial class SystemUser : IdentityUser<string>
     {

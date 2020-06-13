@@ -9,13 +9,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Identity;
 using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.Options;
-using Login.Data;
+using AccessData;
 using Login.Models;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
-namespace Login.Controllers
+namespace ApiWeb.Controllers
 {
     public class AccountController : Controller
     {

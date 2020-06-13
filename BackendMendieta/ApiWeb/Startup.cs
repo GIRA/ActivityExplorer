@@ -16,7 +16,6 @@ using System.Net;
 using AccessData;
 using Model;
 using Microsoft.EntityFrameworkCore;
-using Login.Data;
 using Microsoft.AspNetCore.Identity;
 
 namespace ApiWeb

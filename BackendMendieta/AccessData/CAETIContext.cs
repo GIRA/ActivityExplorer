@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Login.Data
+namespace AccessData
 {
     public partial class CAETIContext : IdentityDbContext<SystemUser, SystemUserRole, string>
     {

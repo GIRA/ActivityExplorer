@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Login.Data
+namespace AccessData
 {
     public class SystemUserRole : IdentityRole<string>
     {
