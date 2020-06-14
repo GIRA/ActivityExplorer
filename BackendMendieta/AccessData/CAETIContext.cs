@@ -23,7 +23,7 @@ namespace AccessData
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Database=CAETI;Initial Catalog=CAETI;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Database=ProyectoMendieta;Initial Catalog=CAETI;Integrated Security=True");
             }
         }
 
