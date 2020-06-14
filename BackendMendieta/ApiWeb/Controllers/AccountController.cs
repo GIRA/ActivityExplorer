@@ -22,7 +22,6 @@ namespace ApiWeb.Controllers
         public static CAETIContext caetiContext;
         public static SignInManager<SystemUser> signInManager;
         public static UserManager<SystemUser> userManager;
-        public static RoleManager<SystemUserRole> roleManager;
 
         public AccountController(CAETIContext context, UserManager<SystemUser> user, SignInManager<SystemUser> signIn)
         {
@@ -88,6 +87,7 @@ namespace ApiWeb.Controllers
             }
         }
 
+        // TODO: We probably need to change the way we find the user, it's not clean. It does work though.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult>Login(LoginViewModel loginViewModel)
