@@ -4,5 +4,8 @@ namespace AccessData
 {
     public class SystemUserRole : IdentityRole<string>
     {
+        public SystemUserRole()
+        {
+        }
     }
 }
