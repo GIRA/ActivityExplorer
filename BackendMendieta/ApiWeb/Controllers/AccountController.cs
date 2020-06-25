@@ -1,61 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.AspNetCore.Identity;
-using System.Runtime.CompilerServices;
-using Microsoft.CodeAnalysis.Options;
 using AccessData;
 using Login.Models;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiWeb.Controllers
 {
-    public class AccountController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : ControllerBase
     {
         public static CAETIContext caetiContext;
         public static SignInManager<SystemUser> signInManager;
         public static UserManager<SystemUser> userManager;
-
-        public AccountController(CAETIContext context, UserManager<SystemUser> user, SignInManager<SystemUser> signIn)
+        private IConfiguration config;
+        public AccountController(IConfiguration configuration, CAETIContext context, UserManager<SystemUser> user, SignInManager<SystemUser> signIn)
         {
+            config = configuration;
             caetiContext = context;
             userManager = user;
             signInManager = signIn;
         }
 
-        // GET: Register
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Register/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-        public ActionResult Login()
-        {
-            return View("Login");
-        }
-
-        // GET: Register/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Register/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RegisterViewModel registerViewModel) 
+        [AllowAnonymous]
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn(RegisterViewModel registerViewModel) 
         {
             try
             {
@@ -73,97 +52,70 @@ namespace ApiWeb.Controllers
                     systemUser.Id = (Convert.ToInt32(caetiContext.SystemUser.Max(u => u.Id)) + 1).ToString();
                 }
 
-                //await userManager.AddPasswordAsync(systemUser, registerViewModel.Password);
                 await userManager.UpdateSecurityStampAsync(systemUser);
-                //await signInManager.CreateUserPrincipalAsync(systemUser);
+                await userManager.CreateAsync(systemUser);
                 await signInManager.SignInAsync(systemUser, true);
-                caetiContext.SystemUser.Add(systemUser);
-                await caetiContext.SaveChangesAsync();
-                return Redirect("/Home");
+                return Login(new LoginViewModel() { 
+                    Email = registerViewModel.Email,
+                    Password = registerViewModel.Password
+                });
             }
-            catch(Exception ex) 
+            catch(Exception ex)
             {
-                return View();
+                return BadRequest(ex.Message);
             }
         }
 
         // TODO: We probably need to change the way we find the user, it's not clean. It does work though.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult>Login(LoginViewModel loginViewModel)
+        // TODO: Return pertinent user information on login. We'll probably have to make a ResponseUserData class or something.
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public IActionResult Login(LoginViewModel loginViewModel)
         {
             try
             {
+                IActionResult result = Unauthorized();
                 SystemUser systemUser = caetiContext.SystemUser.ToList().Find(x => x.Email == loginViewModel.Email);
                 PasswordHasher<SystemUser> passwordHasher = new PasswordHasher<SystemUser>();
-                if (passwordHasher.VerifyHashedPassword(systemUser, systemUser.PasswordHash, loginViewModel.Password) == PasswordVerificationResult.Failed) throw new Exception("Login Failed.");                
-                await signInManager.SignInAsync(systemUser, true);
-                return Redirect("/Home");
+                if (passwordHasher.VerifyHashedPassword(systemUser, systemUser.PasswordHash, loginViewModel.Password) == PasswordVerificationResult.Success)
+                {
+                    var tokenString = GenerateJSONWebToken(systemUser);
+                    result = Ok(new { token = tokenString });
+                }
+                return result;
             }
             catch (Exception ex)
             {
-                return View();
-            }
-            
+                return BadRequest(ex.Message);
+            }            
         }
 
-        public async Task<ActionResult> Logout()
+        private string GenerateJSONWebToken(SystemUser userInfo)
         {
-            try
-            {
-                await signInManager.SignOutAsync();
-                return Redirect("/Home");
-            }
-            catch (Exception ex)
-            {
-                return View();
-            }
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(config["Jwt:Issuer"],
+              config["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        // GET: Register/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Register/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Register/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Register/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        // TODO: Check how to kill the token (if possible).
+        //public async Task<ActionResult> Logout()
+        //{
+        //    try
+        //    {
+        //        await signInManager.SignOutAsync();
+        //        return Redirect("/Home");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }
