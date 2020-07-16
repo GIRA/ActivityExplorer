@@ -17,7 +17,7 @@ namespace Login.Models
         [Required(ErrorMessage = "Mandatory")]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [JsonIgnore]
+        //[JsonIgnore]
         public string Password { get; set; }
     }
 }
