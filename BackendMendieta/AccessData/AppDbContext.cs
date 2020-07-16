@@ -6,6 +6,7 @@ using Model;
 using Microsoft.Extensions.Configuration;
 using AccessData.Configurations;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AccessData
 {
@@ -19,13 +20,20 @@ namespace AccessData
         {
         }
 
+        public AppDbContext(string connectionString) : base(GetOptions(connectionString))
+        {
+        }
+
+        private static DbContextOptions GetOptions(string connectionString)
+        {
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
+        }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //  => options.UseSqlServer("Server=DESKTOP-SPT2LHA;Database=ProyectoMendieta;Trusted_Connection=True;");
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-          => options.UseSqlServer("Server=DESKTOP-SPT2LHA;Database=ProyectoMendieta;Trusted_Connection=True;");
-
-
-         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
             //modelBuilder.ApplyConfiguration(new ActivityConfiguration());
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
