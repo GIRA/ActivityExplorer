@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Login.Data
+namespace AccessData
 {
     public partial class CAETIContext : IdentityDbContext<SystemUser, SystemUserRole, string>
     {
@@ -23,7 +23,7 @@ namespace Login.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Database=CAETI;Initial Catalog=CAETI;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=localhost;Database=ProyectoMendieta;Initial Catalog=CAETI;Integrated Security=True");
             }
         }
 
