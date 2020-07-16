@@ -15,16 +15,18 @@ namespace AccessData
             : base(options)
         {
         }
+        public CAETIContext(string connectionString) : base(GetOptions(connectionString))
+        {
+
+        }
 
         public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<SystemUserRole> SystemUserRoles { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        private static DbContextOptions GetOptions(string connectionString)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Database=ProyectoMendieta;Initial Catalog=CAETI;Integrated Security=True");
-            }
+            return SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), connectionString).Options;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
