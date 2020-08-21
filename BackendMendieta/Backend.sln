@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWeb", "ApiWeb\ApiWeb.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Bussines\Services.csproj", "{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Migrations\Migrations.csproj", "{8E57B74C-7866-4ED6-B0ED-63AA79C63523}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67AEE132-E4E9-4E8A-BE6B-E9E85E1DC557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E57B74C-7866-4ED6-B0ED-63AA79C63523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E57B74C-7866-4ED6-B0ED-63AA79C63523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E57B74C-7866-4ED6-B0ED-63AA79C63523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E57B74C-7866-4ED6-B0ED-63AA79C63523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
