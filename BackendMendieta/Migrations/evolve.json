@@ -1,3 +1,6 @@
 {
-
+  "Evolve.Database": "sqlserver",
+  "Evolve.ConnectionString": "Server=localhost;Database=ProyectoMendieta;Trusted_Connection=True;",
+  "Evolve.Locations": "sql",
+  "Evolve.Command": "migrate"
 }
