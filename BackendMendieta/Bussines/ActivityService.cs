@@ -14,7 +14,7 @@ namespace Services
     {
         static AppDbContext ctx;
         public ActivityService(AppDbContext Ctx)
-        {
+        { 
             ctx = Ctx;
         }
         public List<Activity> GetActivities(string id)
