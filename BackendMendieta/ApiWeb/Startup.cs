@@ -24,7 +24,7 @@ using RichoM.Data;
 using AccessData;
 using Model;
 using Repository;
-
+using System.Data.SqlClient;
 
 namespace ApiWeb
 {
