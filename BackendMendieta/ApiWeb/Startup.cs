@@ -13,13 +13,18 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using System.Net;
-using AccessData;
-using Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Data.SqlClient;
+
+using RichoM.Data;
+using AccessData;
+using Model;
+using Repository;
+
 
 namespace ApiWeb
 {
@@ -42,17 +47,17 @@ namespace ApiWeb
             {
                 options.AddPolicy("PolicyCors",
                     builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
                 services.AddMvcCore()
                    .AddViews();
             });
 
-            //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-            //       Configuration.GetConnectionString("MendietaBd")));
+            services.AddTransient<ActivityRepository>();
+            services.AddSingleton(new Database<SqlConnection>(Configuration.GetConnectionString("MendietaBd")));
 
             services.AddDbContext<CAETIContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("MendietaBd")));
+
             services.AddIdentity<SystemUser, SystemUserRole>(config =>
             {
                 config.Password.RequireDigit = true;

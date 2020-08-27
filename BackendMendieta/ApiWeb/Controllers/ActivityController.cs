@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Repository;
+using RichoM;
 
 //using AccessData;
 
@@ -17,11 +18,11 @@ namespace ApiWeb.Controllers
     [ApiController]
     public class ActivityController : ControllerBase
     {
-        private ActivityRepository activityRepository;
+        private ActivityRepository repository;
         
-        public ActivityController(ActivityRepository activityRepository)
+        public ActivityController(ActivityRepository repository)
         {
-            this.activityRepository = activityRepository;
+            this.repository = repository;
 
         }
         // GET: api/Activity
@@ -32,7 +33,7 @@ namespace ApiWeb.Controllers
         {
             try
             {
-                return activityRepository.GetAll();
+                return repository.GetAll();
             }
             catch (Exception)
             {
@@ -48,7 +49,7 @@ namespace ApiWeb.Controllers
         {
             try
             {
-                return activityRepository.GetById(id);
+                return repository.GetById(id);
             }
             catch (Exception)
             {
@@ -69,7 +70,7 @@ namespace ApiWeb.Controllers
                 {
                     //activities.Add(activity);
                     
-                    activityRepository.Create(activity);
+                    repository.Create(activity);
 
                     confirmation = "inserted";
                 };
