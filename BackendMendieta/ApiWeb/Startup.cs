@@ -47,8 +47,8 @@ namespace ApiWeb
                    .AddViews();
             });
 
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-                   Configuration.GetConnectionString("MendietaBd")));
+            //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
+            //       Configuration.GetConnectionString("MendietaBd")));
 
             services.AddDbContext<CAETIContext>(options =>
                options.UseSqlServer(

@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
-using Services;
-using AccessData;
+using Repository;
+
+//using AccessData;
 
 namespace ApiWeb.Controllers
 {
@@ -16,36 +17,22 @@ namespace ApiWeb.Controllers
     [ApiController]
     public class ActivityController : ControllerBase
     {
-
-        public static AppDbContext Context;
-
-        public static ActivityService activityService;
+        private ActivityRepository activityRepository;
         
-        public ActivityController(AppDbContext context)
+        public ActivityController(ActivityRepository activityRepository)
         {
-            Context = context;
-            activityService = new ActivityService(Context);
+            this.activityRepository = activityRepository;
 
-            //Activity activity1 = new Activity();
-            //Activity activity2 = new Activity();
-
-            //activity1.Id = "1";
-            //activity1.Area = "Robotica";
-            //activity2.Id = "2";
-            //activity2.Area = "Programacion c";
-
-            //activityService.Add(activity1);
-            //activityService.Add(activity2);
         }
         // GET: api/Activity
 
         [EnableCors("PolicyCors")]
         [HttpGet]
-        public List<Activity> Get()
+        public IEnumerable<Activity> Get()
         {
             try
             {
-                return activityService.GetActivities(null);
+                return activityRepository.GetAll();
             }
             catch (Exception)
             {
@@ -57,11 +44,11 @@ namespace ApiWeb.Controllers
         [EnableCors("PolicyCors")]
         // GET: api/Activity/5
         [HttpGet("{id}", Name = "Get")]
-        public List<Activity> Get(string id)
+        public Activity Get(string id)
         {
             try
             {
-                return activityService.GetActivities(id);
+                return activityRepository.GetById(id);
             }
             catch (Exception)
             {
@@ -82,7 +69,7 @@ namespace ApiWeb.Controllers
                 {
                     //activities.Add(activity);
                     
-                    activityService.Add(activity);
+                    activityRepository.Create(activity);
 
                     confirmation = "inserted";
                 };
@@ -102,7 +89,7 @@ namespace ApiWeb.Controllers
             //Activity activity=new Activity();
             try
             {
-                activityService.Modify(activityModify);
+                //activityService.Modify(activityModify);
             }
             catch (Exception)
             {
@@ -118,7 +105,7 @@ namespace ApiWeb.Controllers
             string confirmation = "Not found";
             try
             {
-                activityService.Delete(id);
+                //activityService.Delete(id);
                 confirmation = "Deleted";
             }
             catch (Exception)
